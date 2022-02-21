@@ -5,14 +5,32 @@ difficulty_container = document.querySelector(".difficulty_container");
 tuto_container = document.querySelector(".tuto_container");
 game_container = document.querySelector(".game_container");
 
+question_content = document.querySelector("#question_content");
+propositions_content = document.querySelectorAll(".proposition");
+
+function generateNumbers(min, max) {
+    let number1 = Math.floor(Math.random() * (max - min + 1) + min);
+    let number2 = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return [number1, number2];
+}
+
 function startGame(operators, min, max) {
-    console.log(operators);
-    console.log(min);
-    console.log(max);
-    for (let i = 0; i < 10; i++) {
-        
-        
-    }
+    // console.log(operators);
+    // console.log(min);
+    // console.log(max);
+    let [number1, number2] = generateNumbers(min, max);
+    
+    let operator = operators[Math.floor(Math.random() * operators.length)];
+
+    let question = `${number1} ${operator} ${number2}`;
+
+    let answer = eval(question);
+
+    question_content.innerHTML = question;
+
+    console.log(answer);
+
 }
 
 function setGameOptions(difficulty) {
@@ -46,7 +64,3 @@ difficulties_button.forEach(element => {
         tuto_container.classList.toggle("visible");
     })
 });
-
-
-
-//console.log(Math.floor(Math.random() * (10 - 1 + 1)) + 1);
