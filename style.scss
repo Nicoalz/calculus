@@ -1,0 +1,11 @@
+section {
+    height: 100vh;
+}
+
+.difficulty_container, .tuto_container, .game_container {
+    display:none;
+}
+
+.visible {
+    display: flex;
+}
