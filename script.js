@@ -8,6 +8,21 @@ game_container = document.querySelector(".game_container");
 question_content = document.querySelector("#question_content");
 propositions_content = document.querySelectorAll(".proposition");
 
+count = 0;
+points = 0;
+
+propositions_content.forEach(element => {
+    element.addEventListener("click", function() {
+        if (this.innerHTML == answer) {
+            points++;
+            game(operators, min, max);
+        }
+        else {
+            alert("Wrong!");
+        }
+    });
+});
+
 function generateQuestion(operators, min, max) {
     let number1 = Math.floor(Math.random() * (max - min + 1) + min);
     let number2 = Math.floor(Math.random() * (max - min + 1) + min);
@@ -23,22 +38,47 @@ function generateQuestion(operators, min, max) {
     return [question, answer];  
 }
 
-
 function generatePropositions(answer) {
+    propositions = [];
+    propositions.push(answer);
+    propositions.push(answer + 10);
+    max_proposition = answer + 5;
+    min_proposition = answer - 5;
+    for (let i = 2; i < propositions_content.length; i++) {
+        let proposition = Math.floor(Math.random() * (max_proposition - min_proposition + 1) + min_proposition);
+
+        if (proposition === answer || propositions.includes(proposition)) {
+            i--;
+            continue; 
+        }
+        
+        propositions.push(proposition);
+
+    }
     
-    
+    propositions.sort(() => Math.random() - 0.5);
+    return propositions;
 }
 
-function startGame(operators, min, max) {
 
-    [question, answer] = generateQuestion(operators, min, max);
 
-    propositions = generatePropositions(answer)
+function game(operators, min, max) {
 
-    question_content.innerHTML = question;
-
-    console.log(propositions);
-    console.log(answer);
+    if (count <10) {
+        [question, answer] = generateQuestion(operators, min, max);
+        propositions = generatePropositions(answer)
+    
+        question_content.innerHTML = question;
+        for (let i = 0; i < propositions_content.length; i++) {
+            propositions_content[i].innerHTML = propositions[i];
+        }
+        count++;
+        console.log(propositions);
+        console.log(answer);
+    }
+    else {
+        alert("Finish");
+    }
 
 }
 
@@ -62,7 +102,7 @@ function setGameOptions(difficulty) {
     start_button.addEventListener("click", () => {
         tuto_container.classList.toggle("visible");
         game_container.classList.toggle("visible");
-        startGame(operators, min, max);
+        game(operators, min, max);
     });
 }
 
