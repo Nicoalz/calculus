@@ -8,27 +8,36 @@ game_container = document.querySelector(".game_container");
 question_content = document.querySelector("#question_content");
 propositions_content = document.querySelectorAll(".proposition");
 
-function generateNumbers(min, max) {
+function generateQuestion(operators, min, max) {
     let number1 = Math.floor(Math.random() * (max - min + 1) + min);
     let number2 = Math.floor(Math.random() * (max - min + 1) + min);
 
-    return [number1, number2];
+    let operator = operators[Math.floor(Math.random() * operators.length)];
+    let question = `${number1} ${operator} ${number2}`;
+    let answer = eval(question);
+
+    if (answer <= 0 || answer % 1 !== 0) {
+        return generateQuestion(operators, min, max);  
+    }
+    
+    return [question, answer];  
+}
+
+
+function generatePropositions(answer) {
+    
+    
 }
 
 function startGame(operators, min, max) {
-    // console.log(operators);
-    // console.log(min);
-    // console.log(max);
-    let [number1, number2] = generateNumbers(min, max);
-    
-    let operator = operators[Math.floor(Math.random() * operators.length)];
 
-    let question = `${number1} ${operator} ${number2}`;
+    [question, answer] = generateQuestion(operators, min, max);
 
-    let answer = eval(question);
+    propositions = generatePropositions(answer)
 
     question_content.innerHTML = question;
 
+    console.log(propositions);
     console.log(answer);
 
 }
