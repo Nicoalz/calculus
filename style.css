@@ -10,4 +10,9 @@ section {
   display: flex;
 }
 
+.game_container {
+  flex-direction: column;
+  max-width: 200px;
+}
+
 /*# sourceMappingURL=style.css.map */

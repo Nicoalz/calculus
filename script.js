@@ -8,19 +8,28 @@ game_container = document.querySelector(".game_container");
 question_content = document.querySelector("#question_content");
 propositions_content = document.querySelectorAll(".proposition");
 
+score_content = document.querySelector("#score_content");
+count_content = document.querySelector("#count_content");
+
+next_button = document.querySelector(".next");
+
 count = 0;
-points = 0;
+score = 0;
 
 propositions_content.forEach(element => {
     element.addEventListener("click", function() {
         if (this.innerHTML == answer) {
-            points++;
+            score++;
             game(operators, min, max);
         }
         else {
             alert("Wrong!");
         }
     });
+});
+
+next_button.addEventListener("click", () => {
+    game(operators, min, max);
 });
 
 function generateQuestion(operators, min, max) {
@@ -63,7 +72,9 @@ function generatePropositions(answer) {
 
 
 function game(operators, min, max) {
-
+    score_content.innerHTML = score;
+    count++;
+    count_content.innerHTML = count;
     if (count <10) {
         [question, answer] = generateQuestion(operators, min, max);
         propositions = generatePropositions(answer)
@@ -72,7 +83,6 @@ function game(operators, min, max) {
         for (let i = 0; i < propositions_content.length; i++) {
             propositions_content[i].innerHTML = propositions[i];
         }
-        count++;
         console.log(propositions);
         console.log(answer);
     }
