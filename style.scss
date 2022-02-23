@@ -2,7 +2,7 @@ section {
     height: 100vh;
 }
 
-.difficulty_container, .tuto_container, .game_container {
+.difficulty_container, .tuto_container, .game_container, .final_container {
     display:none;
 }
 
@@ -13,4 +13,16 @@ section {
 .game_container {
     flex-direction: column;
     max-width: 200px;
+}
+
+.final_container {
+    flex-direction: column;
+}
+
+.correct {
+    background-color: #00ff00;
+}
+
+.wrong {
+    background-color: #ff0000;
 }

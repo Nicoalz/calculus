@@ -11,25 +11,40 @@ propositions_content = document.querySelectorAll(".proposition");
 score_content = document.querySelector("#score_content");
 count_content = document.querySelector("#count_content");
 
-next_button = document.querySelector(".next");
+final_container = document.querySelector(".final_container");
+final_score = document.querySelector("#final_score");
+
+restart = document.querySelector("#restart");
 
 count = 0;
 score = 0;
+clickable = true;
 
 propositions_content.forEach(element => {
     element.addEventListener("click", function() {
-        if (this.innerHTML == answer) {
-            score++;
-            game(operators, min, max);
+        if (clickable === true) {
+            clickable = false;
+            if (this.innerHTML == answer) {
+                this.classList.add("correct");
+                score++;
+                score_content.innerHTML = score;
+                
+            }
+            else {
+                this.classList.add("wrong");
+                propositions_content.forEach(element => {
+                    if (element.innerHTML == answer) {
+                        element.classList.add("correct");
+                    }
+                });
+                
+            }
+            setTimeout(() => {
+                game(operators, min, max);
+            }, 500);
         }
-        else {
-            alert("Wrong!");
-        }
+        
     });
-});
-
-next_button.addEventListener("click", () => {
-    game(operators, min, max);
 });
 
 function generateQuestion(operators, min, max) {
@@ -48,6 +63,11 @@ function generateQuestion(operators, min, max) {
 }
 
 function generatePropositions(answer) {
+    clickable = true;
+    propositions_content.forEach(element => {
+        element.classList.remove("correct");
+        element.classList.remove("wrong");
+    });
     propositions = [];
     propositions.push(answer);
     propositions.push(answer + 10);
@@ -72,10 +92,9 @@ function generatePropositions(answer) {
 
 
 function game(operators, min, max) {
-    score_content.innerHTML = score;
     count++;
     count_content.innerHTML = count;
-    if (count <10) {
+    if (count <=10) {
         [question, answer] = generateQuestion(operators, min, max);
         propositions = generatePropositions(answer)
     
@@ -87,10 +106,13 @@ function game(operators, min, max) {
         console.log(answer);
     }
     else {
-        alert("Finish");
+        game_container.classList.toggle("visible");
+        final_container.classList.toggle("visible");
+        final_score.innerHTML = score;
     }
-
 }
+
+
 
 function setGameOptions(difficulty) {
     if (difficulty === "1") {
@@ -122,4 +144,8 @@ difficulties_button.forEach(element => {
         setGameOptions(element.value);
         tuto_container.classList.toggle("visible");
     })
+});
+
+restart.addEventListener("click", () => {
+    location.reload();
 });
