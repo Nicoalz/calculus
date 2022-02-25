@@ -41,7 +41,7 @@ propositions_content.forEach(element => {
             }
             setTimeout(() => {
                 game(operators, min, max);
-            }, 500);
+            }, 3000);
         }
         
     });
