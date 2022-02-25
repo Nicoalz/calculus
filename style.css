@@ -105,6 +105,7 @@ li {
 
 .difficulty {
   font-size: 3rem;
+  color: white;
 }
 .difficulty:nth-of-type(1) {
   background-color: #B0F579;
