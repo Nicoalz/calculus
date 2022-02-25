@@ -12,25 +12,30 @@
         <h1>Calculus</h1>
 
         <div class="difficulty_container visible" >
-            <button value="1" class="difficulty">Facile</button>
-            <button value="2" class="difficulty">Moyen</button>
-            <button value="3" class="difficulty">Difficile</button>
+            <button value="1" class="btn difficulty">Facile</button>
+            <button value="2" class="btn difficulty">Moyen</button>
+            <button value="3" class="btn difficulty">Difficile</button>
         </div>
 
         <div class="tuto_container">
-            Tuto
+            <h3>Tuto</h3>
+            <ul>
+                <li>Résolvez le calcul en cliquant sur la bonne réponse.</li>
+                <li>Le vert indique la bonne réponse.</li>
+                <li>Le rouge indique la mauvaise réponse.</li>
+            </ul>
 
-            <button class="start">Démarrer</button>
+            <button class="btn start">Démarrer</button>
         </div>
 
         <div class="game_container">
-            <p id="question_content">Question...</p>
+            <h2 id="question_content">Question...</h2>
 
             <ul id="propositions_container">
-                <li class="proposition"></li>
-                <li class="proposition"></li>
-                <li class="proposition"></li>
-                <li class="proposition"></li>
+                <li class="proposition">A</li>
+                <li class="proposition">B</li>
+                <li class="proposition">C</li>
+                <li class="proposition">D</li>
             </ul>
 
             <div class="score_container">
@@ -41,7 +46,7 @@
 
         <div class="final_container">
             <p>Ton score final est de <span id="final_score"></span>/10</p>
-            <button id="restart">Rejouer ?</button>
+            <button id="restart" class="btn restart">Rejouer ?</button>
         </div>
 
 
