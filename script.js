@@ -41,7 +41,7 @@ propositions_content.forEach(element => {
             }
             setTimeout(() => {
                 game(operators, min, max);
-            }, 3000);
+            }, 1000);
         }
         
     });
@@ -54,11 +54,18 @@ function generateQuestion(operators, min, max) {
     let operator = operators[Math.floor(Math.random() * operators.length)];
     let question = `${number1} ${operator} ${number2}`;
     let answer = eval(question);
-
-    if (answer <= 0 || answer % 1 !== 0) {
-        return generateQuestion(operators, min, max);  
-    }
     
+    if (operators.includes("*")) {
+        if (answer % 1 !== 0) {
+            return generateQuestion(operators, min, max);  
+        }
+    }
+    else {
+        if (answer <= 0 || answer % 1 !== 0) {
+            return generateQuestion(operators, min, max);  
+        }
+    }
+
     return [question, answer];  
 }
 
@@ -102,8 +109,6 @@ function game(operators, min, max) {
         for (let i = 0; i < propositions_content.length; i++) {
             propositions_content[i].innerHTML = propositions[i];
         }
-        console.log(propositions);
-        console.log(answer);
     }
     else {
         game_container.classList.toggle("visible");
